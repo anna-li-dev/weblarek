@@ -110,7 +110,8 @@ Presenter - презентер содержит основную логику п
 `IOrderResponse` - ответ сервера после успешного оформления заказа.
 
 Описание типов:
-`type TPayment = 'online' | 'cash';` - тип доступных способов оплаты
+`type TPayment = 'online' | 'cash';` - тип доступных способов оплаты.
+`type TFormErrors = Partial<Record<keyof IBuyer, string>>` - тип для валидации ошибок.
 
 ### Модели данных
 Описание классов и их методов

@@ -8,10 +8,10 @@ export class WebLarekApi {
   }
 
   getProducts(): Promise<IProductListResponse> {
-    return this.api.get('/api/weblarek/product/');
+    return this.api.get('/product/');
   }
 
   createOrder(data: IOrderRequest): Promise<IOrderResponse> {
-    return this.api.post('/api/weblarek/order', data)
+    return this.api.post('/order', data)
   }
 }

@@ -3,8 +3,9 @@ import { apiProducts } from './utils/data';
 import { ProductModel } from './components/models/ProductModel';
 import { BasketModel } from './components/models/BasketModel';
 import { CustomerModel } from './components/models/CustomerModel';
-import {WebLarekApi} from './components/models/WebLarekApi'
-import {Api} from './components/base/Api'
+import { WebLarekApi } from './components/models/WebLarekApi'
+import { Api } from './components/base/Api'
+import { API_URL } from './utils/constants'
 
 const productsModel = new ProductModel();
 productsModel.setProducts(apiProducts.items);
@@ -34,9 +35,9 @@ console.log('Покупатель: ', customerModel.getData());
 console.log('Ошибки: ', customerModel.validate());
 customerModel.clear();
 console.log('После очистки данных: ', customerModel.getData());
+console.log('Ошибки: ', customerModel.validate());
 
-const apiUrl = import.meta.env.VITE_API_ORIGIN;
-const api = new Api(apiUrl);
+const api = new Api(API_URL);
 const weblarekApi = new WebLarekApi(api);
 weblarekApi.getProducts()
   .then ( (data) => {
@@ -45,6 +46,9 @@ weblarekApi.getProducts()
     productsModel.setProducts(data.items);
     console.log('Модель данных каталога: ', productsModel.getProducts());
   })
+  .catch ( (error) => {
+    console.error('Ошибка загрузки товаров: ', error);
+  } )
 
 
 

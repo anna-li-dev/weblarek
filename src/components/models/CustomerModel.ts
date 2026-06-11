@@ -1,4 +1,4 @@
-import {IBuyer, TPayment} from '../../types/index'
+import {IBuyer, TPayment, TFormErrors} from '../../types/index'
 
 export class CustomerModel {
   private payment: TPayment | null = null;
@@ -13,7 +13,7 @@ export class CustomerModel {
 
   getData(): IBuyer {
     return {
-      payment: this.payment as TPayment,
+      payment: this.payment,
       address: this.address,
       phone: this.phone,
       email: this.email
@@ -27,8 +27,8 @@ export class CustomerModel {
     this.address = '';
   }
 
-  validate(): Partial<Record<keyof IBuyer, string>> {
-    const errorMessage: Partial<Record<keyof IBuyer, string>> = {};
+  validate(): TFormErrors {
+    const errorMessage: TFormErrors = {};
 
     if(!this.payment) errorMessage.payment = 'Не выбран вид оплаты';
     if(!this.email) errorMessage.email = 'Укажите емэйл';
